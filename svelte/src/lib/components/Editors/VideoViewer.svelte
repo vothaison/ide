@@ -13,7 +13,7 @@
     export let fileName: string;
     $: filePath = combinePath([folderPath, fileName], uiContext.pathSeparator);
 
-    let videoEl: HTMLImageElement;
+    let videoEl: HTMLVideoElement;
     onMount(async () => {
         let handledPath = "rm-file://" + filePath;
         videoEl.src = handledPath;

@@ -122,9 +122,9 @@
         tabOnSaveHandlers.clear();
 
         application.showHideMenuItem({
-            menuItemPath: 'fileMenu/Close Project',
+            menuItemPath: "fileMenu/Close Project",
             visible: true,
-         } as IShowHideMenuRequest);
+        } as IShowHideMenuRequest);
         await registerRecentProject(
             projectFile.content.name,
             `${projectFile.folderPath}${uiContext.pathSeparator}${projectFile.fileName}`
@@ -251,6 +251,11 @@
 
     /** Determine whether there is dirty tab, to display save pending changes dialog */
     const onBeforeUnload = (event: any) => {
+        if (localStorage.preventClosingAfterHotReload) {
+            event.returnValue = "any-value-to-prevent-default";
+            return;
+        }
+        console.warn("onBeforeUnload() ", event);
         const hasDirtyTab = $appState.tabs.some((x) => x.isDirty);
         if (hasDirtyTab) {
             event.returnValue = "any-value-to-prevent-default";
@@ -299,9 +304,9 @@
         appStateDispatch({ type: AppActionType.UnloadProject });
         tabOnSaveHandlers.clear();
         application.showHideMenuItem({
-            menuItemPath: 'fileMenu/Close Project',
+            menuItemPath: "fileMenu/Close Project",
             visible: false,
-         } as IShowHideMenuRequest);
+        } as IShowHideMenuRequest);
 
         goto(NavRoute.GET_STARTED);
     };

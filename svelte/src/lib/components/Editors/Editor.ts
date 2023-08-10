@@ -1,6 +1,7 @@
 import { ActionType, StandardFileExtension } from "rockmelonqa.common";
 import type { ComponentType } from "svelte";
 import PageDefinitionEditor from "./PageDefinitionEditor.svelte";
+import PageDefinitionRevoEditor from "./PageDefinitionRevoEditor.svelte";
 import RmProjectEditor from "./RmProjectEditor.svelte";
 import TestCaseEditor from "./TestCaseEditor.svelte";
 import TestRoutineEditor from "./TestRoutineEditor/TestRoutineEditor.svelte";
@@ -19,7 +20,8 @@ export const getEditor = (fileName: string): ComponentType | undefined => {
         case StandardFileExtension.Environment:
             return EnvEditor;
         case StandardFileExtension.Page:
-            return PageDefinitionEditor;
+            //return PageDefinitionEditor;
+            return PageDefinitionRevoEditor;
         case StandardFileExtension.Project:
             return RmProjectEditor;
         case StandardFileExtension.TestCase:
